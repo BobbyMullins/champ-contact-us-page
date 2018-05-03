@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <title>Contact</title>
+        <style>
+                /* The Modal (background) */
+                .modal {
+                    display: none; /* Hidden by default */
+                    position: fixed; /* Stay in place */
+                    z-index: 1; /* Sit on top */
+                    left: 0;
+                    top: 0;
+                    width: 100%; /* Full width */
+                    height: 100%; /* Full height */
+                    overflow: auto; /* Enable scroll if needed */
+                    background-color: rgb(0,0,0); /* Fallback color */
+                    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                }
+
+                /* Modal Content/Box */
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: 15% auto; /* 15% from the top and centered */
+                    padding: 20px;
+                    border: 1px solid #888;
+                    width: 80%; /* Could be more or less, depending on screen size */
+                }
+
+                /* The Close Button */
+                .close {
+                    color: #aaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+
+                .close:hover,
+                .close:focus {
+                    color: black;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+    </style>
+    </head>
+
+    <body>
+
+			<div class="row">
+					<div class="medium-8 large-6 medium-centered large-centered columns contact__detail-heading">
+							<h3>Let's Get Started</h3>
+					</div>
+			</div>
+			<div class="row">
+					<div class="medium-10 large-8 medium-centered large-centered columns center contact__detail-body">
+							<p>What are your brand's goals for the future? Are you looking to build a new website, strengthen your existing online presence, or explore new digital marketing techniques? Some of our most requested services are: website design and development, search engine optimization (SEO), brand strategy and logo development, social media strategy, e-commerce solutions, and promotional materials.</p>
+
+                        <p><em>Give us ring at 617.517.0733 or send us a note below: we want to hear from you!</em></p>
+					</div>
+			</div>
+			
+			<div class="map__container embed-container">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1474.00485584631!2d-71.20210279212755!3d42.363632298870556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf8432bbe32533680!2sChamp+Internet+Solutions!5e0!3m2!1sen!2sus!4v1513294404440" width="2000" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+			
+            <!-- start modal -->
+        	<div id="myModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                  <p><strong>THANK YOU! Your form has been submitted.</strong></p>
+                  <p>For immediate assistance, please call: <a href="tel:6175170733">617.517.0733</a></p>
+              </div>
+            </div>
+        	<!-- end modal -->
+        
+			<div class="contact__form-container">
+				<script type="text/javascript" src="/CatalystScripts/ValidationFunctions.js?vs=b58.r512241-phase1"></script>
+				<form id="contact-form" name="catwebformform47655" method="post" onsubmit="return checkWholeForm47655(this)" enctype="multipart/form-data" action="http://champ-dev.champinternet.com/FormProcessv2.aspx?WebFormID=406053&OID={module_oid}&OTYPE={module_otype}&EID={module_eid}&CID={module_cid}">
+					<div class="row">
+						<div class="medium-6 columns">
+							<input type="text" name="FullName" id="FullName" placeholder="Hi, my name is" />
+							<input type="text" name="WebAddress" id="WebAddress" placeholder="My current website address is" />
+							{module_ccsecurity}
+						</div>
+						<div class="medium-6 columns">
+							<input type="text" name="EmailAddress" id="EmailAddress" placeholder="You can reach me by email at" />
+							<input type="text" name="WorkPhone" id="WorkPhone" placeholder="Or by phone at" />
+						</div>
+						<div class="medium-12 columns">
+							<textarea name="CAT_Custom_705344" id="CAT_Custom_705344" cols="10" rows="10" class="cat_listbox" onkeydown="if(this.value.length>=4000)this.value=this.value.substring(0,3999);" placeholder="For our next project my team and I are interested in"></textarea>
+						</div>
+						<div class="medium-12 columns center mt3">
+							<input class="button stroked " type="submit" value="Get Started" id="catwebformbutton" />
+						</div>
+					
+					</div>
+
+						<script type="text/javascript">
+								//<![CDATA[
+								var submitcount47655 = 0;
+
+								function checkWholeForm47655(theForm) {
+										var why = "";
+										if (theForm.FullName) why += isEmpty(theForm.FullName.value, "your Name");
+										if (theForm.EmailAddress) why += checkEmail(theForm.EmailAddress.value);
+										if (theForm.WebAddress) why += isEmpty(theForm.WebAddress.value, "your Web Address");
+										if (theForm.WorkPhone) why += isEmpty(theForm.WorkPhone.value, "your Phone Number");
+										if (why != "") {
+												alert(why);
+												return false;
+                                            
+										} else {
+                                                // Alert Container
+                                                var $errorMsg = $(theForm).find(".alert");
+                                                // Disable Button
+                                                $(theForm).find('button[type="submit"]').attr("disabled", "disabled");
+                                                // Remove Previous Error Message
+                                                $errorMsg.removeClass("alert-danger").html("");
+                                                // Ajax Post
+                                                $.ajax({
+                                                  type: 'POST',
+                                                  url: $(theForm).attr("action"), 
+                                                  data: $(theForm).serialize(),
+                                                  success: function(response) {
+                                                    if ($(response).find(".system-error-message").length > 0) {
+                                                      $errorMsg.addClass("alert-danger").append('<p>' + $(response).find(".system-error-message").text() + '</p>');
+                                                    
+                                                    }
+                                                    // If Succesfull Response
+                                                    else {
+                                                      // If you want it to redirect to cusom page specified in the form action make sure to specify PageID=; Otherwise will show sucess message
+                                                      var redirectUrl = $(theForm).attr("action").split("&PageID=")[1];
+                                                      var span = document.getElementsByClassName("close")[0];
+                                                      var modal = document.getElementById('myModal');
+                                                      if (redirectUrl === undefined) {
+                                                            $('#myModal').css('display', 'block'); 
+                                                            span.onclick = function() {
+                                                                modal.style.display = "none";
+                                                                location.reload(true); 
+                                                            }
+                                                            window.onclick = function(event) {
+                                                                if (event.target == modal) {
+                                                                    modal.style.display = "none";
+                                                                    location.reload(true); 
+                                                                }
+                                                            }
+                                                      } else {
+                                                        document.location = redirectUrl;
+                                                      }
+                                                    }
+                                                  },
+                                                  error: function() {
+                                                    alert("An error occured. Please try again or contact us for assistance");
+                                                    $(theForm).find('button[type="submit"]').removeAttr("disabled", "disabled").removeClass("disabled"); // Remove Disabled Attribute on Button
+                                                    $(".spinner").remove(); // Remove Loading Animation (optional)
+                                                  }
+                                                });
+                                                // Prevent Default Form Submission
+                                                return false;
+										}
+								}
+								//]]>
+
+						</script>
+				</form>	
+			</div><!-- form container -->
+                
+			<hr class="mt8 mb10">
+			
+			<div class="row ">
+				<div class="medium-10 medium-centered columns contact__directions-container center">
+					<h3 class="mb6">Directions</h3>
+					<p class="orange mb0">FROM NORTH/SOUTH (ROUTE 128/95)</p>
+					<p class="mb10">From Route 128/95, take exit 27A Totten Pond Road/Wyman Street. Merge onto Winter Street, continue straight onto Totten Pond Road. Turn right onto Lexington Street and then left onto Main Street. Take the 1st right onto Elm Street and a slight left onto River Street. Continue onto Pleasant Street and take a right onto Bridge Street and a left onto California Street. Take your first right onto Chapel Street. Parking is available across the street from the building.</p>
+
+					<p class="orange mb0">FROM EAST (LOGAN AIRPORT/BOSTON)</p>
+					<p class="mb10">Take I-90 West (Mass Pike West) to exit 17 toward Newton/Watertown. Slight right onto Center Street (follow the signs for toward Watertown). Continue onto Galen Street and left on Morse Street. Take left onto Watertown Street and turn right onto Chapel Street. Parking is available across the street from the building.</p>
+
+					<p class="orange mb0">FROM WEST</p>
+					<p>Take the I-90 East (Mass Pike East) to exit 17 toward Newton/Watertown. Merge onto Washington Street, slight left to stay on Washington Street and slight left onto Center Street. Continue onto Galen Street and left on Morse Street. Take left onto Watertown Street and turn right onto Chapel Street. Parking is available across the street from the building.</p>
+
+				</div>
+			</div>
+			
+
+    </body>
+
+</html> 
